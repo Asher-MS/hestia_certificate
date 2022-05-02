@@ -5,4 +5,5 @@ from django.views.decorators.csrf import csrf_exempt
 urlpatterns = [
     path('home/',views.home,name="Home"),
     path('add_template',csrf_exempt(views.add_template),name="Add Template"),
+    path('generate_certificate',csrf_exempt(views.certificate),name="Generate Certificate")
 ]
