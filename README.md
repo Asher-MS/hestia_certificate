@@ -33,4 +33,5 @@ Certificate Generation for Hestia
     "event_y_pos":<y position of the events name>
     "font_size":<Font size>
 
+    The certificate file gets generated at assets/certificates/<event_name>
 ```
