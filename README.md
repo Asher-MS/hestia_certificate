@@ -12,7 +12,7 @@ Certificate Generation for Hestia
 
     POST
 
-    "certificate_template":<image>
+    "certificate_template":<image> (only .png images)
     "event_name":<name of the event>
 
 ```
@@ -33,5 +33,5 @@ Certificate Generation for Hestia
     "event_y_pos":<y position of the events name>
     "font_size":<Font size>
 
-    The certificate file gets generated at assets/certificates/<event_name>
+    The certificate file gets generated at assets/certificates/<event_name>/<name>.png
 ```
