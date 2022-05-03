@@ -42,6 +42,6 @@ def certificate(request):
         return JsonResponse({'status':400,'message':'not enough data'})
 
 
-    generate_certificate(name,event_name,name_x_pos,name_y_pos,event_x_pos,event_y_pos,font_size)
-    return JsonResponse({'status':200,'message':'Accepted'})
+    image_path=generate_certificate(name,event_name,name_x_pos,name_y_pos,event_x_pos,event_y_pos,font_size)
+    return JsonResponse({'status':200,'message':'Accepted','file':image_path})
     
