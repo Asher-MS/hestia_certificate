@@ -3,11 +3,11 @@ from PIL import Image,ImageDraw,ImageFont
 
 
 # font_type=ImageFont.truetype("assets/fonts/tapestry.ttf",100) 
-def generate_certificate(name,event_name,name_x_pos,name_y_pos,event_x_pos,event_y_pos,font_size):
+def generate_certificate(name,event_name,name_x_pos,name_y_pos,event_x_pos,event_y_pos,font_family):
     
     certificate_template='assets/templates/certificate_template_{}.png'.format(event_name)
     output_dir="assets/certificates/{}".format(event_name)
-    name=name
+    font_file="assets/fonts/"+font_family+".ttf"
     if not os.path.exists(output_dir):
         print("Created "+output_dir)
         os.makedirs(output_dir)
@@ -47,19 +47,19 @@ def generate_certificate(name,event_name,name_x_pos,name_y_pos,event_x_pos,event
     # print("Event Font:",event_font_size)
 
     draw=ImageDraw.Draw(img)
-    draw.multiline_text(xy=(name_box[0],name_box[1]),text=name,fill=(0,0,0),font=compute_font(name_box,name))
-    draw.multiline_text(xy=(event_box[0],event_box[1]),text=event_name,fill=(0,0,0),font=compute_font(event_box,event_name))
+    draw.multiline_text(xy=(name_box[0],name_box[1]),text=name,fill=(0,0,0),font=compute_font(name_box,name,font_file))
+    draw.multiline_text(xy=(event_box[0],event_box[1]),text=event_name,fill=(0,0,0),font=compute_font(event_box,event_name,font_file))
     img.save(output_dir+"/{}.png".format(name))
     print("Generated certificate for {}".format(name))
     return output_dir+"/{}.png".format(name)
 
 
-def compute_font(box,text):
+def compute_font(box,text,font_file):
     font_size=100
-    font=ImageFont.truetype("assets/fonts/tapestry.ttf",font_size)
+    font=ImageFont.truetype(font_file,font_size)
     size=None
     while (size is None or size[0] > box[2] or size[1] > box[3]) and font_size > 0:
-        font = ImageFont.truetype("assets/fonts/tapestry.ttf", font_size)
+        font = ImageFont.truetype(font_file, font_size)
         size = font.getsize_multiline(text)
         # print("Name Size : ",name_size)
         font_size -= 1

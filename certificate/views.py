@@ -33,18 +33,23 @@ def add_template(request):
 def certificate(request):
     try:
         name=request.POST['name']
+        
         event_name=request.POST['event_name']
+        font_family=request.POST['font_family']
         name_x_pos=int(request.POST['name_x_pos'])
         name_y_pos=int(request.POST['name_y_pos'])
         event_x_pos=int(request.POST['event_x_pos'])
         event_y_pos=int(request.POST['event_y_pos'])
-        font_size=int(request.POST['font_size']) 
+        
+        if not os.path.exists("assets/fonts/"+font_family+".ttf"):
+            raise Exception("Font Not present")
+         
     except Exception as e:
         print(e)
         return JsonResponse({'status':400,'message':'not enough data'})
 
 
-    image_path=generate_certificate(name,event_name,name_x_pos,name_y_pos,event_x_pos,event_y_pos,font_size)
+    image_path=generate_certificate(name,event_name,name_x_pos,name_y_pos,event_x_pos,event_y_pos,font_family)
     
     # This portion returns the path of the file on the server.
     return JsonResponse({'status':200,'message':'Accepted','file':image_path})
