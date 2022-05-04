@@ -19,8 +19,8 @@ def generate_certificate(name,event_name,name_x_pos,name_y_pos,event_x_pos,event
     
 
     img=Image.open(certificate_template)
-    name_box=((name_x_pos,name_y_pos,img.size[0]/2,100))
-    event_box=((event_x_pos,event_y_pos,img.size[0]/2,100))
+    name_box=((name_x_pos,name_y_pos,img.size[0]/2,img.size[1]/50))
+    event_box=((event_x_pos,event_y_pos,img.size[0]/2,img.size[1]/50))
 
     # print("Name Box : ",name_box)
     # print("Event Box : ",event_box)
