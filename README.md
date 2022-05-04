@@ -31,7 +31,7 @@ Certificate Generation for Hestia
     "name_y_pos":<y pos of the name>
     "event_x_pos":<x position of the events name>
     "event_y_pos":<y position of the events name>
-    "font_size":<Font size>
+    "font_family":<The Font family of the text> Choices : [albertus,montserrat,tapestry,formata]
 
     The certificate file gets generated at assets/certificates/<event_name>/<name>.png
 ```
