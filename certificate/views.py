@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from .generate import generate_certificate
+from django.http import FileResponse
+import os
 # Create your views here.
 def home(request):
     
@@ -43,5 +45,12 @@ def certificate(request):
 
 
     image_path=generate_certificate(name,event_name,name_x_pos,name_y_pos,event_x_pos,event_y_pos,font_size)
+    
+    # This portion returns the path of the file on the server.
     return JsonResponse({'status':200,'message':'Accepted','file':image_path})
+
+    # This portion return the file through http
+    image=open(image_path,'rb')
+    response=FileResponse(image)
+    return response
     
