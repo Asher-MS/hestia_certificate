@@ -43,6 +43,9 @@ def certificate(request):
         
         if not os.path.exists("assets/fonts/"+font_family+".ttf"):
             raise Exception("Font Not present")
+
+        if not os.path.exists('assets/templates/certificate_template_{}.png'.format(event_name)):
+            raise Exception("Event Certificate Template not Present")
          
     except Exception as e:
         print(e)
@@ -59,3 +62,14 @@ def certificate(request):
     response=FileResponse(image)
     return response
     
+
+def list_certificates(request):
+    result={}
+    for event in os.listdir("assets/certificates"):
+        certificates=[]
+        for certificate in os.listdir("assets/certificates/"+event):
+            certificates.append(certificate)
+            
+        result[event]=certificates
+    # print(result)
+    return JsonResponse(result)
