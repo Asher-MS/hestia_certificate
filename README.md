@@ -35,3 +35,10 @@ Certificate Generation for Hestia
 
     The certificate file gets generated at assets/certificates/<event_name>/<name>.png
 ```
+### List Certificates
+```
+    /list_certificates?event=<event name>
+    
+    GET
+    if event is not provided returns all the certificats present in the server
+    if event is provided returns all the certificates of the specific event
