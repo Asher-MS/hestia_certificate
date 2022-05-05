@@ -38,8 +38,13 @@ def certificate(request):
         font_family=request.POST['font_family']
         name_x_pos=int(request.POST['name_x_pos'])
         name_y_pos=int(request.POST['name_y_pos'])
+        name_box_height=int(request.POST['name_box_height'])
+        name_box_width=int(request.POST['name_box_width'])
         event_x_pos=int(request.POST['event_x_pos'])
         event_y_pos=int(request.POST['event_y_pos'])
+        event_box_height=int(request.POST['event_box_height'])
+        event_box_width=int(request.POST['event_box_width'])
+
         
         if not os.path.exists("assets/fonts/"+font_family+".ttf"):
             raise Exception("Font Not present")
@@ -52,7 +57,7 @@ def certificate(request):
         return JsonResponse({'status':400,'message':'not enough data'})
 
 
-    image_path=generate_certificate(name,event_name,name_x_pos,name_y_pos,event_x_pos,event_y_pos,font_family)
+    image_path=generate_certificate(name,event_name,name_x_pos,name_y_pos,name_box_height,name_box_width,event_x_pos,event_y_pos,event_box_height,event_box_width,font_family)
     
     # This portion returns the path of the file on the server.
     return JsonResponse({'status':200,'message':'Accepted','file':image_path})
