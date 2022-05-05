@@ -64,12 +64,22 @@ def certificate(request):
     
 
 def list_certificates(request):
+    certificate_dir="assets/certificates/"
     result={}
-    for event in os.listdir("assets/certificates"):
+    try :
+        event=request.GET['event']
         certificates=[]
-        for certificate in os.listdir("assets/certificates/"+event):
-            certificates.append(certificate)
-            
+        for certificate in os.listdir(certificate_dir+event):
+            certificates.append(certificate_dir+event+"/"+certificate)
         result[event]=certificates
-    # print(result)
-    return JsonResponse(result)
+        return JsonResponse(result)
+    
+    except Exception as e:
+        
+        for event in os.listdir(certificate_dir):
+            certificates=[]
+            for certificate in os.listdir(certificate_dir+event):
+                certificates.append(certificate_dir+event+"/"+certificate)
+            result[event]=certificates
+        # print(result)
+        return JsonResponse(result)
