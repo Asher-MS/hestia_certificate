@@ -1,6 +1,6 @@
 import os
 from PIL import Image,ImageDraw,ImageFont
-
+from .models import Certificate
 
 # font_type=ImageFont.truetype("assets/fonts/tapestry.ttf",100) 
 def generate_certificate(name,event_name,name_x_pos,name_y_pos,name_box_height,name_box_width,event_x_pos,event_y_pos,event_box_height,event_box_width,font_family):
@@ -28,6 +28,8 @@ def generate_certificate(name,event_name,name_x_pos,name_y_pos,name_box_height,n
     draw.multiline_text(xy=(name_box[0],name_box[1]),text=name,fill=(0,0,0),font=compute_font(name_box,name,font_file))
     draw.multiline_text(xy=(event_box[0],event_box[1]),text=event_name,fill=(0,0,0),font=compute_font(event_box,event_name,font_file))
     img.save(output_dir+"/{}.png".format(name))
+    certificate=Certificate(name=name,event_name=event_name,font_family=font_family,name_x_pos=name_x_pos,name_y_pos=name_y_pos,name_box_height=name_box_height,name_box_width=name_box_width,event_x_pos=event_x_pos,event_y_pos=event_y_pos,event_box_height=event_box_height,event_box_width=event_box_width,file=output_dir+"/{}.png".format(name))
+    certificate.save()
     print("Generated certificate for {}".format(name))
     return output_dir+"/{}.png".format(name)
 
