@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from .generate import generate_certificate
 from django.http import FileResponse
+from .models import Certificate
 import os
 # Create your views here.
 def home(request):
@@ -88,3 +89,17 @@ def list_certificates(request):
             result[event]=certificates
         # print(result)
         return JsonResponse(result)
+
+
+
+def verify(request):
+    current_certificate=None
+    certificate_id=request.GET.get("id")
+    try:
+        current_certificate=Certificate.objects.get(id=certificate_id)
+    except Exception as e:
+        print(e)
+    if current_certificate:
+        return HttpResponse("{}\n{}".format(current_certificate.name,current_certificate.event_name))
+    else:
+        return HttpResponse("No certificate found")
