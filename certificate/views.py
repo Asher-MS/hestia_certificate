@@ -100,6 +100,11 @@ def verify(request):
     except Exception as e:
         print(e)
     if current_certificate:
-        return HttpResponse("{}\n{}".format(current_certificate.name,current_certificate.event_name))
+        context={
+            'verified':True,
+            'name':current_certificate.name,
+            'event_name':current_certificate.event_name,
+        }
+        return render(request,'certificate/verify.html',context)
     else:
         return HttpResponse("No certificate found")
